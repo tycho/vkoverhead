@@ -703,8 +703,11 @@ draw(unsigned iterations)
    // The compiler can't do this because it can't prove that the draw call
    // doesn't alter the dispatch table
    PFN_vkCmdDrawIndexed vkCmdDrawIndexed = VK(CmdDrawIndexed);
-   for (unsigned i = 0; i < iterations; i++, count++)
-      vkCmdDrawIndexed(cmdbuf, 3, 1, 0, 0, 0);
+   uint64_t priv_count = count;
+   VkCommandBuffer cmdbuf_priv = cmdbuf;
+   for (unsigned i = 0; i < iterations; i++, priv_count++)
+	   vkCmdDrawIndexed(cmdbuf_priv, 3, 1, 0, 0, 0);
+   count = priv_count;
 }
 
 static void
