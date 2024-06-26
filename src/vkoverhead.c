@@ -3679,26 +3679,10 @@ main(int argc, char *argv[])
    }
 
    if (!output_only) {
-      printf("\n| %-*s | %-*s | %-*s |\n",
-             MAX2((int)strlen(dev->info.props.deviceName)       , 11), "Device Name",
-             MAX2((int)strlen(dev->info.driver_props.driverName), 11), "Driver Name",
-             MAX2((int)strlen(dev->info.driver_props.driverInfo), 11), "Driver Info");
-      printf("| ");
-      for (int i=0; i<MAX2((int)strlen(dev->info.props.deviceName)       , 11); i++)
-        printf("-");
-      printf(" | ");
-      for (int i=0; i<MAX2((int)strlen(dev->info.driver_props.driverName), 11); i++)
-        printf("-");
-      printf(" | ");
-      for (int i=0; i<MAX2((int)strlen(dev->info.driver_props.driverInfo), 11); i++)
-        printf("-");
-      printf(" |\n");
-      printf("| %-*s | %-*s | %-*s |\n\n",
-             MAX2((int)strlen(dev->info.props.deviceName)       , 11),
+	  printf("<table>\n<thead><tr><td>Device Name</td><td>Driver Name</td><td>Driver Info</td></tr></thead>\n");
+      printf("<tbody><tr><td>%s</td><td>%s</td><td><pre>%s</pre></td></tr></tbody>\n</table>\n\n",
              dev->info.props.deviceName,
-             MAX2((int)strlen(dev->info.driver_props.driverName), 11),
              dev->info.driver_props.driverName,
-             MAX2((int)strlen(dev->info.driver_props.driverInfo), 11),
              dev->info.driver_props.driverInfo );
    }
    if (!submit_only && !descriptor_only && !misc_only && !hic_only && !output_only && start_no < (int)ARRAY_SIZE(cases_draw)) {
